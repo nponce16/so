@@ -1,0 +1,28 @@
+1. 	0000000000004014 B j	(en BSS data section, es decir, en el heap)
+	00000000000011c9 T suma	(en text section)
+	Con el  comando nm solo se puede saber la dirección de la variable j ya que es una variable global, en cambio la de i no se puede porque es local.
+	
+	Para compilar utilicé el comando gcc -o mem1_previo mem1_previo.c -static
+	
+	
+	mem2_previo:
+		10:
+		HEAP: 0x00a68000 - 0x00a46000 = 0x00022000
+		DATOS: 0x00498000 - 0x00401000 = 0x00097000
+		
+		40000:
+		HEAP: 0x020cc000 - 0x020aa000 = 0x00022000
+		DATOS: 0x00498000 - 0x00401000 =0x00097000
+	
+	mem2_previo_v2:
+		10:
+		HEAP: 0x00929000 - 0x00906000 = 0x00023000
+		DATOS: 0x00498000 - 0x00401000 = 0x00097000
+		
+		40000:
+		HEAP: 0x0202f000 - 0x01fe5000 = 0x0004a000
+		DATOS: 0x00498000 - 0x00401000 = 0x00097000
+		
+	En el mem2_previo, que no usamos el malloc, no hay diferencia entre el tamaño del heap ni de datos ingresando los diferentes valores.
+	En cambio, en el  mem2_previo_v2 sí que los hay, debido a que el heap necesita más espacio para hacer un vector de 40000 elementos. El valorer de los datos es el mismo.
+		

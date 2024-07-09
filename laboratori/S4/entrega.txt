@@ -1,0 +1,25 @@
+ALARM1:
+
+1. Luego de 5 segundos no sucede nada, pero al cabo de 10 el proceso termina e imprime "Temporizador".
+2. No és el mateix comportament. Si fem kill a l'executar alarm1, es mostrarà el missatge "Terminado" en comptes de "Temporizador".
+3. El proceso padre (la Shell) muestra el mensaje por la consola y con la llamada al waitpid() recoge el cómo ha terminado alarm1.
+4. No, ya que cuando llega el signal SIGALRM, la acción por defecto es acabar el proceso y así nunca llega a ejecutar el exit(1).
+
+
+ALARM2:
+
+1. Se puede observar que al enviar el signal ALRM desde la otra terminal el programa imprime los mensajes que debería imprimir cada 10 segundos. Por lo tanto, el control de tiempo no funciona como pretendía el programa, ya que como hemos enviado antes el signal, no pasan 10 segundos entre mensaje y mensaje.
+
+2. Sí, excepto SIGKILL y SIGSTOP.
+
+3. Una posible solución es restar a la variable "segundos" el valor que retorna alarm, de este modo el tiempo que imprime sería el correcto.
+
+
+ALARM3:
+
+1. Tanto el proceso padre como el hijo reciben los SIGALARM. Puede comprobarse ejecutando el programa y viendo que se imprimen dos mensajes y porque el ps muetra dos procesos alarm3 ejecutándose.
+
+
+ALARM4:
+
+1. El padre programa el SIGALARM y el hijo lo hereda. El hijo recibe la alarma y trata el signal cada vez que éste se envia; en cambio el padre se queda en el sigsuspend() a la espera de recibir un SIGALRM, pero como nunca hace una llamada a alarm() no hace ni imprime nada. Lo hemos comprobado matando al hijo y viendo que el proceso nunca terminaba de ejecutarse ni tampoco imprimía ningún mensaje.

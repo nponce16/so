@@ -1,0 +1,24 @@
+1. 	00000000004c73b0 B j	(en BSS data section, es decir, en el heap)
+	0000000000401745 T suma	(en text section)
+	Con el  comando nm solo se puede saber la dirección de la variable j ya que es una variable global, en cambio la de i no se puede porque es local.
+	
+	Para compilar utilicé el comando gcc -o mem1_previo mem1_previo.c -static
+	
+	
+	mem2_previo:
+		10:
+		HEAP: 0184f000-01871000  = 0x22000, 139,264 bytes.
+		no hay información para datos.
+		
+		40000:
+		HEAP: 01fe1000-02003000 = 0x0002d000, 184.320 bytes.
+		DATOS:
+	
+	mem2_previo_v2:
+		10:
+		HEAP: 0143f000-01462000 = 0x00023000, 143.360 bytes.
+		DATOS:
+		
+		40000:
+		HEAP: 017c2000-0180c000 = 0x3a000, 237.568 bytes.
+		DATOS:

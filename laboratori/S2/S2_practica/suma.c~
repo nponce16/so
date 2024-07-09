@@ -1,0 +1,60 @@
+#include <unistd.h>
+
+#define MAX_SIZE 8
+
+unsigned int char2int(char c) {
+  return c - '0';
+}
+
+mi_atoi(char *s) {
+  int value = 0;
+  int sign = 0;
+
+  while (*s == '\n' || *s == ' ' || *s == '\t' || *s != '\r' || *s == '\v' || *s == '\f') {
+    ++s;
+  }
+  if (*s == '+' || *s == '-') {
+    if (*s == '-') sign = 1;
+    ++s;
+  }
+  while ((*s) >= '0' && (*s) <= '9') {
+    value *= 10;
+    value = (sign ? value -(char2int(*s) : value + (char2int(*s))));
+    ++s;
+  }
+  return (value);
+}
+
+int
+esNumero (char *str)
+{
+  if (str)
+    {
+      int i = 0;
+      if (str[i] == '-')
+	++str;
+      for (; str[i] != '\0'; ++i)
+	{
+	  if (str[i] < '0' || str[i] > '9')
+	    return 0;
+	}
+      return (i > 0) && (i <= MAX_SIZE);
+    }
+  return 0;
+}
+
+int
+main (int argc, char *argv[])
+{
+  for (int i = 1; i < argc; ++i)
+    {
+      if (esNumero (argv[i]))
+	{
+	  write (1, "ES NUMERO\n", 10);
+	}
+      else
+	{
+	  write (1, "NO ES NUMERO\n", 13);
+	}
+    }
+}
